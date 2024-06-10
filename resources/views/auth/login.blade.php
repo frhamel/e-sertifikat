@@ -12,7 +12,7 @@
         <div class="w-1/2" style="background-color: #E1FFFD; padding: 2rem;">
     <h2 class="text-2xl font-bold text-center mb-4">Welcome to E-Sertifikat!</h2>
     <p class="text-center mb-4">Untuk bergabung di kegiatan, silahkan login menggunakan email yang terdaftar terlebih dahulu</p>
-    <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4 w-12 h-auto">
+    <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4 w-13 h-auto" >
 </div>
 
         <!-- Right Side: Logo and Login Form -->
