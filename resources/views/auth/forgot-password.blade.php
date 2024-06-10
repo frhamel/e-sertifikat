@@ -17,13 +17,13 @@
         <div class="w-1/2 bg-custom p-8 flex flex-col items-center justify-center">
             <h2 class="text-2xl font-bold text-center mb-4">Welcome to E-Sertifikat!</h2>
             <p class="text-center mb-4">Untuk reset password, silahkan masukkan email yang terdaftar.</p>
-            <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4 w-14 h-auto">
+            <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4" style="width: 447px; height: 439px;">
         </div>
 
         <!-- Right Side: Forgot Password Form -->
         <div class="w-1/2 p-8 flex flex-col justify-center">
             <div class="text-center mb-8">
-                <img src="{{ asset('img/logoe-sertifikat.png') }}" alt="Logo" class="mx-auto mb-4 w-20 h-auto">
+                <img src="{{ asset('img/logoe-sertifikat.png') }}" alt="Logo" class="mx-auto mb-4" style="width: 217px; height: 204px;">
             </div>
 
             <div class="mb-4 text-sm text-gray-600">

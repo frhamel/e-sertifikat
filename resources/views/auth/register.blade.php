@@ -12,7 +12,7 @@
         <div class="w-1/2" style="background-color: #E1FFFD; padding: 2rem;">
         <h2 class="text-2xl font-bold text-center mb-4">Welcome to E-Sertifikat!</h2>
         <p class="text-center mb-4">Silahkan isi formulir untuk membuat akun baru</p>
-        <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4 w-14 h-auto">
+        <img src="{{ asset('img/gambarlogo.png') }}" alt="Welcome Image" class="mx-auto mb-4" style="width: 447px; height: 439px;">
 </div>
 
 
@@ -20,7 +20,7 @@
         <!-- Right Side: Logo and Registration Form -->
         <div class="w-1/2 p-8 flex flex-col justify-center">
             <div class="text-center mb-8">
-                <img src="{{ asset('img/logoe-sertifikat.png') }}" alt="Logo" class="mx-auto mb-4 w-20 h-auto">
+                <img src="{{ asset('img/logoe-sertifikat.png') }}" alt="Logo" class="mx-auto mb-4" style="width: 217px; height: 204px;">
             </div>
 
             <x-validation-errors class="mb-4" />
