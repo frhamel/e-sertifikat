@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\PesertaController;
 
 
 /*
@@ -58,6 +59,10 @@ Route::middleware([
             // return 'dashboard user';
             return view('pages.dashboard_user');
         })->name('dashboard_user');
+
+        Route::resource('/tbl_peserta', \App\Http\Controllers\PesertaController::class);
+
+    
 
         // bisa ditambahkan route baru sesuai kebutuhan
     });

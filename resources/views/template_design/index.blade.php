@@ -21,17 +21,17 @@
                 <td>{{ $sertifikat->template_id }}</td>
                 <td>{!! $sertifikat->nama_template !!}</td>
                 <td class="text-center">
-                    <img src="{{ asset('/storage/template_design/'.$sertifikat->gambar_template) }}" class="rounded" style="width: 150px">
+                    <img src="{{ asset('storage/template_design/' . $sertifikat->gambar_template) }}" class="rounded" style="width: 150px;">
                 </td>
                 <td class="text-center">
-                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('template_design.destroy', $sertifikat->template_id) }}" method="POST">
-                        <a href="{{ route('template_design.edit', $sertifikat->template_id) }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-edit"></i> EDIT
-                        </a>
+                    <a href="{{ route('template_design.edit', $sertifikat->template_id) }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('template_design.destroy', $sertifikat->template_id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">
-                            <i class="fas fa-trash-alt"></i> DELETE
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>
                 </td>

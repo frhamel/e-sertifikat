@@ -41,31 +41,27 @@ class SertifikatController extends Controller
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
-    {
-        //  dd($request);
+{
+    // Validate form
+    $this->validate($request, [
+        'nama_template' => 'required|min:3',
+        'gambar_template' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+    ]);
 
-        //validate form
-        $this->validate($request, [
-            'nama_template'   => 'required|min:3',
-            'gambar_template'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            // 'title'     => 'required|min:10',
-        ]);
+    // Upload image
+    $image = $request->file('gambar_template'); 
+    $image->storeAs('public/template_design', $image->hashName());
 
-        //upload image
-        $image = $request->file('gambar_template'); 
-        $image->storeAs('public/template_design', $image->hashName());
+    // Create post
+    Sertifikat::create([
+        'nama_template' => $request->nama_template,
+        'gambar_template' => $image->hashName(),
+    ]);
 
-        //create post
-        Sertifikat::create([
-            'nama_template'    => $request->nama_template,
-            'gambar_template' => $image->hashName()
-            // 'title'     => $request->title,
-        ]);
+    // Redirect to index
+    return redirect()->route('template_design.index')->with(['success' => 'Data Berhasil Disimpan!']);
+}
 
-        //redirect to index
-        return redirect()->route('template_design.index')->with(['success' => 'Data Berhasil Disimpan!']);
-    }
- 
     
     public function destroy($template_design): RedirectResponse
     {
@@ -97,7 +93,9 @@ class SertifikatController extends Controller
         // return view('template_design.edit', compact('sertifikat'));
 
         // Mengirimkan data template ke tampilan edit
-        return view('template_design.edit', ['sertifikat' => $sertifikat]);
+        return view('template_design.edit', ['sertifikat' => $sertifikat]) ->with('success', 'Data berhasil diperbarui');
+
+        
     }
     
     /**

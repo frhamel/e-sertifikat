@@ -22,18 +22,18 @@
             </div>
         </div> --}}
 
-        <!-- SidebarSearch Form -->
-        <div class="form-inline mt-3">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                    aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
+      <!-- SidebarSearch Form -->
+<div class="form-inline mt-3">
+    <div class="input-group" data-widget="sidebar-search" style="background-color: #F5FFFE;">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+            aria-label="Search">
+        <div class="input-group-append">
+            <button class="btn btn-sidebar" style="background-color: #F5FFFE; border-color: #F5FFFE;">
+                <i class="fas fa-search fa-fw" style="color: #000;"></i>
+            </button>
         </div>
+    </div>
+</div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -89,10 +89,10 @@
                         </p>
                     </a>
                     <li class="nav-item">
-                   <a href="{{ route('tbl_sertifikat.index') }}" class="nav-link">
-                   <i class="fa fa-award"></i> <!-- Font Awesome 4 -->
+                   <a href="{{ route('tbl_peserta.index') }}" class="nav-link">
+                   <i class="fa-solid fa-user-plus"></i>
                         <p>
-                             Sertifikat
+                             Peserta
                             {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
                     </a>

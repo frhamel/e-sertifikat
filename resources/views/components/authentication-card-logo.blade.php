@@ -1,3 +1,4 @@
+<!-- resources/views/components/authentication-card-logo.blade.php -->
 <a href="/">
-    <img src="https://hexaintegra.com/wp-content/uploads/2022/05/logo_hexa.png" alt="">
+    <img src="{{ asset('img/logo-esertifikat.png') }}" alt="Logo E-Sertifikat" class="w-22 h-21">
 </a>

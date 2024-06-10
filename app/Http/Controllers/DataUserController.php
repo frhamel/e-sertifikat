@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 use App\Models\DataUser;
+use Illuminate\Support\Facades\Hash;
 
 //return type redirectResponse
 use Illuminate\Http\RedirectResponse;
@@ -53,21 +54,19 @@ public function update(Request $request, $id): RedirectResponse
 
     // Dapatkan pengguna berdasarkan ID
     $datauser = Datauser::findOrFail($id);
-    // dd($request);
-
+    // dd($datauser);
+    
     // Jika password disediakan, hash password sebelum menyimpannya 
     if (isset($request->password)) {
-        $validated['password'] = bcrypt($request->password);
+        $validated['password'] = Hash::make($request->password); //bcrypt($request->password);
     } 
-//   dd($validated);
+    // dd($request->password, bcrypt('12345678'), bcrypt($request->password), $validated);
+    // dd($validated['password']);
     // Perbarui data pengguna
     $datauser->update($validated);
 
     // Redirect ke halaman index dengan pesan sukses
      return redirect()->route('data_users.index')->with(['success' => 'Data Berhasil Diubah!']);
-    
-       
-
 }
 
 
