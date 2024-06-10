@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\EventController;
 
 
 /*
@@ -61,6 +62,11 @@ Route::middleware([
         })->name('dashboard_user');
 
         Route::resource('/tbl_peserta', \App\Http\Controllers\PesertaController::class);
+
+        Route::resource('/tbl_event', \App\Http\Controllers\EventController::class);
+         Route::get('tbl_event/{id}/template', [EventController::class, 'template'])->name('tbl_event.template');
+         Route::post('tbl_event/{id}/saveTemplate', [EventController::class, 'saveTemplate'])->name('tbl_event.saveTemplate');
+         Route::get('/tbl_event/generate/{id}', [EventController::class, 'generatePDF'])->name('tbl_event.generate');
 
     
 
