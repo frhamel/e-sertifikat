@@ -11,50 +11,45 @@
     </div>
 </nav>
 
-<!-- <div class="container">
-    <div class="row mb-3">
-        <div class="col-6">
-            <h4>Pengaturan > User</h4>
-        </div>
-        <div class="col-6 text-end">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="searchInput">
-        </div>
-    </div> -->
-    <div class="row">
-        <div class="col">
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
-                    <thead class="table-primary">
+<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
+                <thead class="table-primary">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($datauser as $user)
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Aksi</th>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td class="text-center">
+                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('data_users.destroy', $user->id) }}" method="POST">
+                                    <a href="{{ route('data_users.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($datauser as $datauser)
-                            <tr>
-                                <td>{{ $datauser['id'] }}</td>
-                                <td>{{ $datauser['name'] }}</td>
-                                <td>{{ $datauser['email'] }}</td>
-                                <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('data_users.destroy', $datauser['id']) }}" method="POST">
-                                        <a href="{{ route('data_users.edit', $datauser['id']) }}" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center mt-3">
+            {{ $datauser->links() }}
         </div>
     </div>
 </div>
@@ -68,17 +63,8 @@
         var rows = document.querySelectorAll('#dataTable tbody tr');
         rows.forEach(function(row) {
             var cells = row.querySelectorAll('td');
-            var isMatch = false;
-            cells.forEach(function(cell) {
-                if (cell.textContent.toLowerCase().indexOf(searchText) !== -1) {
-                    isMatch = true;
-                }
-            });
-            if (isMatch) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText) !== -1 || cells[2].textContent.toLowerCase().indexOf(searchText) !== -1;
+            row.style.display = isMatch ? '' : 'none';
         });
     });
 </script>

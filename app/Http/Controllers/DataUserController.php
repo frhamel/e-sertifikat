@@ -15,14 +15,13 @@ use Illuminate\Http\RedirectResponse;
 
 class DataUserController extends Controller
 {
-    public function index() :View
+    public function index() : View
     {
-       $datauser = Datauser::all();
-
-    //    return$data_user;
-       return view('data_users.index', compact('datauser'));
+        $datauser = Datauser::paginate(10); // Paginate with 10 records per page
+    
+        return view('data_users.index', compact('datauser'));
     }
-
+    
     public function edit(string $id): View
     {
         //get post by ID

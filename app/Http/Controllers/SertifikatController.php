@@ -99,50 +99,48 @@ class SertifikatController extends Controller
     }
     
     /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $id
-     * @return RedirectResponse
-     */
-    public function update(Request $request, $id): RedirectResponse
-    {
-        //validate form
-        $this->validate($request, [
-            'nama_template'   => 'required|min:3',
-            'gambar_template'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
+ * update
+ *
+ * @param  mixed $request
+ * @param  mixed $id
+ * @return RedirectResponse
+ */
+public function update(Request $request, $id): RedirectResponse
+{
+    //validate form
+    $this->validate($request, [
+        'nama_template'   => 'required|min:3',
+        'gambar_template' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+    ]);
+
+    //get post by ID
+    $sertifikat = Sertifikat::findOrFail($id);
+
+    //check if image is uploaded
+    if ($request->hasFile('gambar_template')) {
+        //upload new image
+        $image = $request->file('gambar_template');
+        $image->storeAs('public/template_design', $image->hashName());
+
+        //delete old image
+        Storage::delete('public/template_design/' . $sertifikat->gambar_template);
+
+        //update post with new image
+        $sertifikat->update([
+            'nama_template'    => $request->nama_template,
+            'gambar_template' => $image->hashName()
         ]);
-
-        //get post by ID
-        $sertifikat = Sertifikat::findOrFail($id);
-
-        //check if image is uploaded
-        if ($request->hasFile('image')) {
-
-            //upload new image
-            $image = $request->file('gambar_template');
-            $image->storeAs('public/template_design', $image->hashName());
-
-            //delete old image
-            Storage::delete('public/template_design/'.$post->image);
-
-            //update post with new image
-            $sertifikat->update([
-                'nama_template'    => $request->nama_template,
-                'gambar_template' => $gambar->hashName()
-            ]);
-
-        } else {
-
-            //update post without image
-            $sertifikat->update([
-                'nama_template'    => $request->nama_template,
-            ]);
-        }
-
-        //redirect to index
-        return redirect()->route('template_design.index')->with(['success' => 'Data Berhasil Diubah!']);
+    } else {
+        //update post without image
+        $sertifikat->update([
+            'nama_template'    => $request->nama_template,
+        ]);
     }
+
+    //redirect to index
+    return redirect()->route('template_design.index')->with(['success' => 'Data Berhasil Diubah!']);
+}
+
 
     // public function show(string $id): View
     // {
