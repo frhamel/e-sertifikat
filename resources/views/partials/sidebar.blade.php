@@ -62,6 +62,17 @@
                             <i class="right badge badge-danger"></i>
                         </p>
                     </a>
+
+                    <li class="nav-item">
+                   <a href="{{ route('tbl_peserta.index') }}" class="nav-link">
+                   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                   <i class="fa-solid fa-user-plus"></i>
+                        <p>
+                             Peserta
+                            {{-- <span class="right badge badge-danger">New</span> --}}
+                        </p>
+                    </a>
+                </li>
                 @else
                 <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -116,7 +127,7 @@
                             {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
                     </a>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                    <a href="{{ route('tbl_peserta.index') }}" class="nav-link">
                    <i class="fa-solid fa-user-plus"></i>
                         <p>
@@ -124,7 +135,7 @@
                             {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

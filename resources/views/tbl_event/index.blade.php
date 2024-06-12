@@ -42,14 +42,15 @@
                     </td>
                     <td class="text-center">
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('tbl_event.destroy', $event->event_id) }}" method="POST">
-                            <a href="{{ route('tbl_event.show', $event->event_id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                            <a href="{{ route('tbl_event.edit', $event->event_id) }}" class="btn btn-sm btn-warning">EDIT</a>
-                            <a href="{{ route('tbl_event.template', $event->event_id) }}" class="btn btn-sm btn-primary">TEMPLATE</a>
-                            <a href="{{ route('tbl_event.generate', $event->event_id) }}" class="btn btn-sm btn-secondary">GENERATE</a>
-                            @csrf
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                        <a href="{{ route('tbl_event.show', $event->event_id) }}" class="btn btn-sm btn-dark"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{{ route('tbl_event.edit', $event->event_id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ route('tbl_event.template', $event->event_id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-list"></i></a>
+                        <a href="{{ route('tbl_event.generate', $event->event_id) }}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-print"></i></a>
+                        @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                        </form>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
                     </td>
                 </tr>
             @endforeach

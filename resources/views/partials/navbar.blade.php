@@ -100,16 +100,21 @@
         </li> --}}
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a data-toggle="dropdown" href="#">
-                <div class="user-panel d-flex">
-                    <div class="image">
-                        <img src="{{ asset('img/photoadmin.jpg') }}" class="img-circle elevation-2"style="width: 40px; height: 45px;" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <span class="d-block">Admin</span>
-                    </div>
-                </div>
-            </a>
+        <a data-toggle="dropdown" href="#">
+    <div class="user-panel d-flex">
+        <div class="image">
+            @if (auth()->user()->role_id == 2)
+                <img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
+            @else
+                <img src="{{ asset('img/photoadmin.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
+            @endif
+        </div>
+        <div class="info">
+            <span class="d-block">{{ auth()->user()->name }}</span>
+        </div>
+    </div>
+</a>
+
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="{{ url('user/profile') }}" class="dropdown-item">
                     <i class="fas fa-user mr-2"></i> Profile
