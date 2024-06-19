@@ -119,9 +119,9 @@
                             {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
         </a>
-        <li class="nav-item">
+                <li class="nav-item">
                    <a href="{{ route('data_users.index') }}" class="nav-link">
-                   <i class="fa fa-user-circle"></i> <!-- Font Awesome 4 -->
+                        <i class="fa fa-user-circle"></i> <!-- Font Awesome 4 -->
                         <p>
                              Data Users
                             {{-- <span class="right badge badge-danger">New</span> --}}

@@ -21,8 +21,9 @@ class SertifikatController extends Controller
 
     public function index(): View 
     {
+        $sertifikat = Sertifikat::paginate(10);
 
-        $sertifikat = Sertifikat::latest()->paginate(10);
+        // $sertifikat = Sertifikat::latest()->paginate(10);
         // dd($sertifikat);
 
          return view ('template_design.index', compact('sertifikat')); //supaya ambil data template design

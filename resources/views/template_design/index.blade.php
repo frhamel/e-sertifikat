@@ -11,74 +11,126 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
         </div>
-        <a href="{{ route('template_design.create') }}" class="btn btn-primary">Add Certificate</a>
     </div>
 </nav>
 
-<div class="table-responsive">
-    <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
-        <thead class="table-primary">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Gambar Template</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($sertifikat as $sertifikat)
-                <tr>
-                    <td>{{ $sertifikat->template_id }}</td>
-                    <td>{!! $sertifikat->nama_template !!}</td>
-                    <td class="text-center">
-                        <img src="{{ asset('storage/template_design/' . $sertifikat->gambar_template) }}" class="rounded" style="width: 150px;">
-                    </td>
-                    <td class="text-center">
-                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('template_design.destroy', $sertifikat->template_id) }}" method="POST" style="display: inline;">
-                        <a href="{{ route('template_design.edit', $sertifikat->template_id) }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-edit"></i> 
-                        </a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash-alt"></i> 
+<div class="row">
+    <div class="col">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex flex-column align-items-start border-bottom-0">
+                <a href="{{ route('template_design.create') }}" class="btn btn-primary mb-3">Add Certificate</a>
+                <div class="d-flex align-items-center w-100">
+                    <div class="d-flex align-items-center">
+                        <label for="showEntries" class="mr-2 mb-0">Show</label>
+                        <select id="showEntries" class="form-control form-control-sm mr-2">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span class="mb-0">entries</span>
+                    </div>
+                    <div class="input-group ml-auto" style="width: 300px;">
+                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
                             </button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4" class="text-center alert alert-danger">No Templates Found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Gambar Template</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($sertifikat as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{!! $item->nama_template !!}</td>
+                                    <td class="text-center">
+                                        <img src="{{ asset('storage/template_design/' . $item->gambar_template) }}" class="rounded" style="width: 150px;">
+                                    </td>
+                                    <td class="text-center">
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('template_design.destroy', $item->template_id) }}" method="POST" style="display: inline;">
+                                            <a href="{{ route('template_design.edit', $item->template_id) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center alert alert-danger">No Templates Found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white d-flex justify-content-between align-items-center border-top-0">
+                <div class="pagination-info">
+                    Showing {{ $sertifikat->firstItem() }} to {{ $sertifikat->lastItem() }} of {{ $sertifikat->total() }} entries
+                </div>
+                <div class="pagination-links ml-auto">
+                    @if ($sertifikat->previousPageUrl())
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $sertifikat->previousPageUrl() }}"><i class="fas fa-chevron-left"></i> Previous</a>
+                        </button>
+                    @else
+                        <button class="btn btn-sm btn-light" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                    @endif
+
+                    @for ($i = 1; $i <= $sertifikat->lastPage(); $i++)
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $sertifikat->url($i) }}">{{ $i }}</a>
+                        </button>
+                    @endfor
+
+                    @if ($sertifikat->nextPageUrl())
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $sertifikat->nextPageUrl() }}">Next <i class="fas fa-chevron-right"></i></a>
+                        </button>
+                    @else
+                        <button class="btn btn-sm btn-light" disabled>
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-    @if(session()->has('success'))
-        toastr.success('{{ session('success') }}', 'BERHASIL!');
-    @elseif(session()->has('error'))
-        toastr.error('{{ session('error') }}', 'GAGAL!');
-    @endif
+@endsection
 
+@push('scripts')
+<script>
     document.getElementById('searchInput').addEventListener('input', function() {
         var searchText = this.value.toLowerCase();
         var rows = document.querySelectorAll('#dataTable tbody tr');
         rows.forEach(function(row) {
             var cells = row.querySelectorAll('td');
-            var isMatch = false;
-            cells.forEach(function(cell) {
-                if (cell.textContent.toLowerCase().indexOf(searchText) !== -1) {
-                    isMatch = true;
-                }
-            });
-            if (isMatch) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText) !== -1 || cells[2].textContent.toLowerCase().indexOf(searchText) !== -1;
+            row.style.display = isMatch ? '' : 'none';
         });
     });
 </script>
-@endsection
+@endpush

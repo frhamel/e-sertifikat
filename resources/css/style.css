@@ -8,3 +8,26 @@
     margin-right: 10px;
 }
 
+ #showEntries {
+    border-bottom: none; /* Menghapus garis bawah pada select */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Memberikan jarak antara kedua bagian card-header */
+}
+
+.input-group {
+    width: 70%; /* Lebar maksimal untuk kotak pencarian */
+}
+
+@media (max-width: 750px) {
+    .input-group {
+        width: 100%; /* Responsif untuk tampilan layar kecil */
+    }
+}
+
+
+

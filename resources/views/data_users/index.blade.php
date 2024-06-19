@@ -13,94 +13,99 @@
 
 <div class="row">
     <div class="col">
-        <div class="table-responsive">
-            <div class="d-flex justify-content-between mb-3">
-                <!-- Show entries dropdown -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center border-bottom-0">
+            <div class="card-header bg-white d-flex justify-content-end align-items-center border-bottom-0 mt-2">
                 <div class="d-flex align-items-center">
-        <label for="showEntries">Show</label>
-        <select id="showEntries" class="form-control mx-2">
-            <!-- <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option> -->
-        </select>
-        <span>entries</span>
-    </div>
-
-                <!-- Tambah Data button -->
-                <div>
-                    <a href="{{ route('data_users.create') }}" class="btn btn-sm btn-primary">
-                        Tambah Data
-                    </a>
+                    <label for="showEntries" class="mr-2 mb-0">Show</label>
+                    <select id="showEntries" class="form-control form-control-sm mr-2">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span class="mb-0">entries</span>
+                </div>
+            </div>
+                <div class="input-group ml-auto" style="width: 300px;">
+                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
-                <thead class="table-primary">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($datauser as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td class="text-center">
-                                <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('data_users.destroy', $user->id) }}" method="POST">
-                                    <a href="{{ route('data_users.edit', $user->id) }}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" style="background-color: white;" id="dataTable">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($datauser as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td class="text-center">
+                                        <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('data_users.destroy', $user->id) }}" method="POST">
+                                            <a href="{{ route('data_users.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-between align-items-center border-top-0">
+                <div class="pagination-info">
+                    Showing {{ $datauser->firstItem() }} to {{ $datauser->lastItem() }} of {{ $datauser->total() }} entries
+                </div>
+                <div class="pagination-links ml-auto">
+                    @if ($datauser->previousPageUrl())
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $datauser->previousPageUrl() }}"><i class="fas fa-chevron-left"></i> Previous</a>
+                        </button>
+                    @else
+                        <button class="btn btn-sm btn-light" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                    @endif
 
-            <div class="pagination-container">
-    <div class="pagination-info">
-        Showing {{ $datauser->firstItem() }} to {{ $datauser->lastItem() }} of {{ $datauser->total() }} entries
-    </div>
-    <div class="pagination-links" style="float: right;">
-        <div class="pagination-prev" style="display: inline-block; margin-right: 10px;">
-            @if ($datauser->previousPageUrl())
-                <button class="btn btn-sm btn-light">
-                    <a href="{{ $datauser->previousPageUrl() }}"><i class="fas fa-chevron-left"></i> Previous</a>
-                </button>
-            @else
-                <button class="btn btn-sm btn-light" disabled>
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-            @endif
+                    @for ($i = 1; $i <= $datauser->lastPage(); $i++)
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $datauser->url($i) }}">{{ $i }}</a>
+                        </button>
+                    @endfor
+
+                    @if ($datauser->nextPageUrl())
+                        <button class="btn btn-sm btn-light">
+                            <a href="{{ $datauser->nextPageUrl() }}">Next <i class="fas fa-chevron-right"></i></a>
+                        </button>
+                    @else
+                        <button class="btn btn-sm btn-light" disabled>
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    @endif
+                </div>
+            </div>
         </div>
-        @for ($i = 1; $i <= $datauser->lastPage(); $i++)
-            <button class="btn btn-sm btn-light">
-                <a href="{{ $datauser->url($i) }}">{{ $i }}</a>
-            </button>
-        @endfor
-        @if ($datauser->nextPageUrl())
-            <button class="btn btn-sm btn-light">
-                <a href="{{ $datauser->nextPageUrl() }}">Next <i class="fas fa-chevron-right"></i></a>
-            </button>
-        @else
-            <button class="btn btn-sm btn-light" disabled>
-                Next <i class="fas fa-chevron-right"></i>
-            </button>
-        @endif
     </div>
-</div>
-</div>
-
 
 
 @endsection
@@ -112,8 +117,8 @@
         var rows = document.querySelectorAll('#dataTable tbody tr');
         rows.forEach(function(row) {
             var cells = row.querySelectorAll('td');
-            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText)!== -1 || cells[2].textContent.toLowerCase().indexOf(searchText)!== -1;
-            row.style.display = isMatch? '' : 'none';
+            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText) !== -1 || cells[2].textContent.toLowerCase().indexOf(searchText) !== -1;
+            row.style.display = isMatch ? '' : 'none';
         });
     });
 </script>
