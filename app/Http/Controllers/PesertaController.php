@@ -22,7 +22,7 @@ class PesertaController extends Controller
     public function index(): View 
     {  
 
-        $peserta = Peserta::latest()->paginate(10);
+        $peserta = Peserta::paginate(10);
 
         // Mengambil ID user yang sedang login
         $userId = auth()->id();

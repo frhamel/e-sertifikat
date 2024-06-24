@@ -17,26 +17,14 @@
 <div class="row">
     <div class="col">
         <div class="card shadow-sm">
-            <div class="card-header bg-white d-flex flex-column align-items-start border-bottom-0">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center border-bottom-0">
                 <a href="{{ route('template_design.create') }}" class="btn btn-primary mb-3">Add Certificate</a>
-                <div class="d-flex align-items-center w-100">
-                    <div class="d-flex align-items-center">
-                        <label for="showEntries" class="mr-2 mb-0">Show</label>
-                        <select id="showEntries" class="form-control form-control-sm mr-2">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select>
-                        <span class="mb-0">entries</span>
-                    </div>
-                    <div class="input-group ml-auto" style="width: 300px;">
-                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                <div class="input-group ml-auto" style="width: 300px;">
+                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -127,8 +115,8 @@
         var searchText = this.value.toLowerCase();
         var rows = document.querySelectorAll('#dataTable tbody tr');
         rows.forEach(function(row) {
-            var cells = row.querySelectorAll('td');
-            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText) !== -1 || cells[2].textContent.toLowerCase().indexOf(searchText) !== -1;
+            var namaTemplate = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            var isMatch = namaTemplate.indexOf(searchText) !== -1;
             row.style.display = isMatch ? '' : 'none';
         });
     });

@@ -15,18 +15,6 @@
     <div class="col">
         <div class="card shadow-sm">
             <div class="card-header bg-white d-flex justify-content-between align-items-center border-bottom-0">
-            <div class="card-header bg-white d-flex justify-content-end align-items-center border-bottom-0 mt-2">
-                <div class="d-flex align-items-center">
-                    <label for="showEntries" class="mr-2 mb-0">Show</label>
-                    <select id="showEntries" class="form-control form-control-sm mr-2">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
-                    <span class="mb-0">entries</span>
-                </div>
-            </div>
                 <div class="input-group ml-auto" style="width: 300px;">
                     <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
                     <div class="input-group-append">
@@ -106,7 +94,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
 @endsection
 
