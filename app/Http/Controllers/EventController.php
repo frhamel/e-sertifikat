@@ -177,8 +177,9 @@ public function template(string $id): View
 /**
  * Menyimpan template untuk resource yang spesifik.
  */
-public function saveTemplate(Request $request, string $id): RedirectResponse
+public function saveTemplate(Request $request, $id)
 {
+    // dd($request->all());
     // $request->validate([
     //     'template_id' => 'required|exists:template_design,template_id',
     // ]);

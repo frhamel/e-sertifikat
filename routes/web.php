@@ -5,6 +5,8 @@ use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FillPDFController;
+
 
 
 /*
@@ -61,12 +63,13 @@ Route::middleware([
             return view('pages.dashboard_user');
         })->name('dashboard_user');
 
-        Route::resource('/tbl_peserta', \App\Http\Controllers\PesertaController::class);
+         Route::resource('/tbl_peserta', \App\Http\Controllers\PesertaController::class);
 
-        Route::resource('/tbl_event', \App\Http\Controllers\EventController::class);
+         Route::resource('/tbl_event', \App\Http\Controllers\EventController::class);
          Route::get('tbl_event/{id}/template', [EventController::class, 'template'])->name('tbl_event.template');
          Route::post('tbl_event/{id}/saveTemplate', [EventController::class, 'saveTemplate'])->name('tbl_event.saveTemplate');
-         Route::get('/tbl_event/generate/{id}', [EventController::class, 'generatePDF'])->name('tbl_event.generate');
+        //  Route::get('/tbl_event/generate/{id}', [EventController::class, 'generatePDF'])->name('tbl_event.generate');
+        Route::get('generate-sertifikat/{id}', [FillPDFController::class, 'generateSertifikat'])->name('generate-sertifikat');
 
     
 

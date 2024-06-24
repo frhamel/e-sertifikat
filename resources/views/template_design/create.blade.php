@@ -33,10 +33,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="font-weight-bold">GAMBAR</label>
+                            <label class="font-weight-bold">GAMBAR PREVIEW TEMPLATE</label>
                             <input type="file" class="form-control @error('gambar_template') is-invalid @enderror" name="gambar_template">
                             <!-- error message untuk gambar_template -->
                             @error('gambar_template')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">FILE TEMPLATE</label>
+                            <input type="file" class="form-control @error('file_template') is-invalid @enderror" name="file_template">
+                            <!-- error message untuk file_template -->
+                            @error('file_template')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>

@@ -43,4 +43,12 @@ class Event extends Model
     {
         return $this->belongsTo(TemplateDesign::class, 'template_id');
     }
+
+    /**
+     * Get the participants (peserta) for the event.
+     */
+    public function peserta()
+    {
+        return $this->hasMany(Peserta::class);
+    }
 }

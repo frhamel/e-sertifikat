@@ -46,7 +46,7 @@
                         <a href="{{ route('tbl_event.show', $event->event_id) }}" class="btn btn-sm btn-dark"><i class="fa-solid fa-eye"></i></a>
                         <a href="{{ route('tbl_event.edit', $event->event_id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href="{{ route('tbl_event.template', $event->event_id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-list"></i></a>
-                        <a href="{{ route('tbl_event.generate', $event->event_id) }}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('generate-sertifikat', $event->event_id) }}" class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></a>
                         @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></button>

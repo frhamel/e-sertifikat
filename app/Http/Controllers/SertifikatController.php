@@ -47,16 +47,25 @@ class SertifikatController extends Controller
     $this->validate($request, [
         'nama_template' => 'required|min:3',
         'gambar_template' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        'file_template' => 'required|mimes:pdf|max:2048', // max size in kilobytes (2MB)
     ]);
 
-    // Upload image
+    // Upload preview image
     $image = $request->file('gambar_template'); 
     $image->storeAs('public/template_design', $image->hashName());
+
+    // Upload PDF template
+    if ($request->file('file_template')->isValid()) {
+        $file_template = $request->file('file_template');
+        $filename = time() . '_' . $file_template->getClientOriginalName();
+        $file_template->storeAs('public/template_design', $filename);
+    }
 
     // Create post
     Sertifikat::create([
         'nama_template' => $request->nama_template,
         'gambar_template' => $image->hashName(),
+        'file_template' => $filename
     ]);
 
     // Redirect to index
@@ -112,6 +121,7 @@ public function update(Request $request, $id): RedirectResponse
     $this->validate($request, [
         'nama_template'   => 'required|min:3',
         'gambar_template' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        'file_template' => 'required|mimes:pdf|max:2048', // max size in kilobytes (2MB)
     ]);
 
     //get post by ID
@@ -126,10 +136,21 @@ public function update(Request $request, $id): RedirectResponse
         //delete old image
         Storage::delete('public/template_design/' . $sertifikat->gambar_template);
 
+        // Upload PDF template
+        if ($request->file('file_template')->isValid()) {
+            $file_template = $request->file('file_template');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file_template->storeAs('public/template_design', $filename);
+
+            //delete old file template
+            Storage::delete('public/template_design/' . $sertifikat->file_template);
+        }
+
         //update post with new image
         $sertifikat->update([
             'nama_template'    => $request->nama_template,
-            'gambar_template' => $image->hashName()
+            'gambar_template' => $image->hashName(),
+            'file_template' => $filename
         ]);
     } else {
         //update post without image

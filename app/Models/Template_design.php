@@ -14,6 +14,7 @@ class Template_design extends Model
     protected $fillable = [
         'nama_template',
         'gambar_template',
+        'file_template',
     ];
 
     /**

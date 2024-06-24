@@ -27,6 +27,7 @@ class Sertifikat extends Model
     protected $fillable = [
         'nama_template',
         'gambar_template',
+        'file_template',
         // 'created at',
         // 'updated at',
     ];

@@ -42,4 +42,12 @@ class Peserta extends Model
         'school',
         'status',
     ];
+
+    /**
+     * Get the event that owns the participant (peserta).
+     */
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id'); // Tambahkan parameter 'event_id'
+    }
 }
