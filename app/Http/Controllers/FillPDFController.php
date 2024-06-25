@@ -96,10 +96,17 @@ class FillPDFController extends Controller
 
             // Menambahkan tanda tangan
             $tandaTanganPath = $ttd_event; // Ganti dengan path tanda tangan Anda
-            $tandaTanganX = 220; // Koordinat X untuk tanda tangan
-            $tandaTanganY = 220; // Koordinat Y untuk tanda tangan
-            $tandaTanganWidth = 100; // Lebar tanda tangan
+            $tandaTanganX = 235; // Koordinat X untuk tanda tangan
+            $tandaTanganY = 233; // Koordinat Y untuk tanda tangan
+            $tandaTanganWidth = 45; // Lebar tanda tangan
             $fpdi->Image($tandaTanganPath, $tandaTanganX, $tandaTanganY, $tandaTanganWidth);
+
+            // Menambahkan nama_ttd
+            $namaTtdX = 235; // Sesuaikan koordinat X untuk nama_ttd
+            $namaTtdY = 280; // Sesuaikan koordinat Y untuk nama_ttd
+            $fpdi->SetFont("Arial", "", 30); // Mengubah ukuran dan gaya font untuk nama_ttd
+            $fpdi->SetTextColor(25, 26, 25); // Mengubah warna teks menjadi hitam
+            $fpdi->Text($namaTtdX, $namaTtdY, $event->nama_ttd);
 
             }
         
