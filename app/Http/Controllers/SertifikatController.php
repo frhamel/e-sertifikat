@@ -139,7 +139,7 @@ public function update(Request $request, $id): RedirectResponse
         // Upload PDF template
         if ($request->file('file_template')->isValid()) {
             $file_template = $request->file('file_template');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time() . '_' . $file_template->getClientOriginalName();
             $file_template->storeAs('public/template_design', $filename);
 
             //delete old file template

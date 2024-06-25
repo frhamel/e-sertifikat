@@ -15,14 +15,14 @@
                             <label for="template_id" class="font-weight-bold">Template Design</label>
                             <select class="form-control" id="template_id" name="template_id">
                                 @foreach($template_design as $template)
-                                    <option value="{{ $template->template_id }}" data-image="{{ asset($template->gambar_template) }}">{{ $template->nama_template }}</option>  
+                                    <option value="{{ $template->template_id }}" data-image="{{ asset('storage/template_design/'). '/' . $template->gambar_template }}">{{ $template->nama_template }}</option>  
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Preview Template</label>
                             <div>
-                                <img id="template-preview" src="{{ asset('path/to/default-template-image.png') }}" class="img-fluid rounded" style="width: 150px">
+                                <img id="template-preview" src="{{ asset('sertifikatkelulusan.jpeg') }}" class="img-fluid rounded" style="width: 150px">
                             </div>
                         </div>
                         <div class="text-left">
@@ -36,12 +36,22 @@
 </div>
 @endsection
 
-@section('scripts')
+@push('js')
 <script>
-    document.getElementById('template_id').addEventListener('change', function() {
-        var selectedTemplate = this.options[this.selectedIndex].getAttribute('data-image');
-        console.log(selectedTemplate); // Tambahkan ini untuk memastikan path gambar benar
-        document.getElementById('template-preview').src = selectedTemplate;
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('template_id').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var dataImage = selectedOption.getAttribute('data-image');
+            // var path = "{{ asset('storage/template_design/" + dataImage + "') }}";
+            // console.log(dataImage);  // Cetak nilai data-image ke console
+            document.getElementById('template-preview').src = dataImage;
+            // Anda dapat melakukan hal lain dengan dataImage di sini
+        });
     });
+    // document.getElementById('template_id').addEventListener('change', function() {
+    //     var selectedTemplate = this.options[this.selectedIndex].getAttribute('data-image');
+    //     console.log(selectedTemplate); // Tambahkan ini untuk memastikan path gambar benar
+    //     // document.getElementById('template-preview').src = selectedTemplate;
+    // });
 </script>
-@endsection
+@endpush

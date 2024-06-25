@@ -30,6 +30,12 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
 
+    <style>
+        .list-group-item {
+            background-color: grey;
+        }
+    </style>
+
     @stack('css')
 </head>
 

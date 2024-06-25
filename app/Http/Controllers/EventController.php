@@ -170,6 +170,8 @@ public function template(string $id): View
    
     $event = Event::findOrFail($id);
     $template_design = Template_design::all(); // atau filter sesuai kebutuhan Anda
+
+    // dd($template_design);
    
     return view('tbl_event.template', compact('event', 'template_design'));
 }
