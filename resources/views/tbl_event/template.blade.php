@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label class="font-weight-bold">Preview Template</label>
                             <div>
-                                <img id="template-preview" src="{{ asset('sertifikatkelulusan.jpeg') }}" class="img-fluid rounded" style="width: 150px">
+                                <img id="template-preview" src="{{ asset('sertifikatpendidikan.png') }}" class="img-fluid rounded" style="width: 450px">
                             </div>
                         </div>
                         <div class="text-left">
