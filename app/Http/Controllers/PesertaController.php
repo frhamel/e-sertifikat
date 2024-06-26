@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Storage;
 //return type redirectResponse
 use Illuminate\Http\RedirectResponse;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class PesertaController extends Controller
 {
     public function index(): View 
     {  
-
-        $peserta = Peserta::paginate(10);
+        $peserta = Peserta::paginate(10); 
+        // dd(get_class($peserta));
 
         // Mengambil ID user yang sedang login
         $userId = auth()->id();

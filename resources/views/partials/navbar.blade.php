@@ -1,16 +1,20 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-    {{-- <ul class="navbar-nav">
-        <li class="nav-item">
+    <ul class="navbar-nav">
+       <!-- Hamburger menu for toggling sidebar -->
+       <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            @if (auth()->user()->role_id == 2)
+                <!-- User role -->
+                <a href="{{ url('dashboard_user') }}" class="nav-link">Home</a>
+            @else
+                <!-- Admin role -->
+                <a href="{{ url('dashboard') }}" class="nav-link">Home</a>
+            @endif
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
-    </ul> --}}
+    </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -100,20 +104,20 @@
         </li> --}}
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-        <a data-toggle="dropdown" href="#">
-    <div class="user-panel d-flex">
-        <div class="image">
-            @if (auth()->user()->role_id == 2)
-                <img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
-            @else
-                <img src="{{ asset('img/photoadmin.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
-            @endif
-        </div>
-        <div class="info">
-            <span class="d-block">{{ auth()->user()->name }}</span>
-        </div>
-    </div>
-</a>
+            <a data-toggle="dropdown" href="#">
+                <div class="user-panel d-flex">
+                    <div class="image">
+                        @if (auth()->user()->role_id == 2)
+                            <img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
+                        @else
+                            <img src="{{ asset('img/photoadmin.jpg') }}" class="img-circle elevation-2" style="width: 40px; height: 45px;" alt="User Image">
+                        @endif
+                    </div>
+                    <div class="info">
+                        <span class="d-block">{{ auth()->user()->name }}</span>
+                    </div>
+                </div>
+            </a>
 
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="{{ url('user/profile') }}" class="dropdown-item">

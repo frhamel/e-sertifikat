@@ -13,7 +13,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>40</h3>
+                <h3>5</h3>
                 <p>Total User</p>
             </div>
             <div class="icon">

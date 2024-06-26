@@ -8,9 +8,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-        </div>
     </div>
 </nav>
 
@@ -18,15 +15,11 @@
     <div class="col">
         <div class="card shadow-sm">
             <div class="card-header bg-white d-flex justify-content-between align-items-center border-bottom-0">
-                <a href="{{ route('template_design.create') }}" class="btn btn-primary mb-3">Add Certificate</a>
-                <div class="input-group ml-auto" style="width: 300px;">
-                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                <a href="{{ route('template_design.create') }}" class="btn btn-primary">Tambah Sertifikat</a>
+                <form action="{{ route('template_design.index') }}" method="GET" class="input-group ml-auto" style="width: 300px;">
+                    <!-- <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan Nama" value="{{ request()->get('search') }}"> -->
+                    <!-- <button class="btn btn-outline-secondary" type="submit">Cari</button> -->
+                </form>
             </div>
 
             <div class="card-body">
@@ -43,7 +36,7 @@
                         <tbody>
                             @forelse ($sertifikat as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ($sertifikat->currentPage() - 1) * $sertifikat->perPage() + $loop->iteration }}</td>
                                     <td>{!! $item->nama_template !!}</td>
                                     <td class="text-center">
                                         <img src="{{ asset('storage/template_design/' . $item->gambar_template) }}" class="rounded" style="width: 150px;">
@@ -87,7 +80,7 @@
                     @endif
 
                     @for ($i = 1; $i <= $sertifikat->lastPage(); $i++)
-                        <button class="btn btn-sm btn-light">
+                        <button class="btn btn-sm btn-light {{ $i == $sertifikat->currentPage() ? 'active' : '' }}">
                             <a href="{{ $sertifikat->url($i) }}">{{ $i }}</a>
                         </button>
                     @endfor

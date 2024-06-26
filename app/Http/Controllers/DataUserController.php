@@ -17,7 +17,7 @@ class DataUserController extends Controller
 {
     public function index() : View
     {
-        $datauser = Datauser::paginate(3); // Paginate with 10 records per page
+        $datauser = Datauser::paginate(10); // Paginate with 10 records per page
     
         return view('data_users.index', compact('datauser'));
     }

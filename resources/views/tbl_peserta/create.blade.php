@@ -2,27 +2,25 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Data Peserta</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body style="background: lightgray">
-
-    <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white rounded mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Tambah Data Peserta</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
                  <!-- tombol back -->
-                <a href="{{ route('tbl_peserta.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+                <!-- <a href="{{ route('tbl_peserta.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a> -->
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <form action="{{ route('tbl_peserta.store') }}" method="POST" enctype="multipart/form-data">
                         
                             @csrf 
+                             <!-- tombol back -->
+                <a href="{{ route('tbl_peserta.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+                <div class="card border-0 shadow-sm rounded">
+                    <div class="card-body">
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NAMA</label>

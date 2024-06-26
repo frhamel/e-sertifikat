@@ -15,11 +15,17 @@
     <div class="row">
         <div class="col-md-12">
             <!-- tombol back -->
-            <a href="{{ route('template_design.store') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+            <!-- <a href="{{ route('template_design.store') }}" class="btn btn-md btn-secondary mb-3">Kembali</a> -->
             <div class="card border-0 shadow-sm rounded">
                 <div class="card-body">
                     <form action="{{ route('template_design.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
+                        <!-- tombol back -->
+            <a href="{{ route('template_design.store') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+            <div class="card border-0 shadow-sm rounded">
+                <div class="card-body">
+                    <form action="{{ route('template_design.store') }}" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group">
                             <label class="font-weight-bold">NAMA</label>

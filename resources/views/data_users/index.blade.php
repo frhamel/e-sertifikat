@@ -15,14 +15,11 @@
     <div class="col">
         <div class="card shadow-sm">
             <div class="card-header bg-white d-flex justify-content-between align-items-center border-bottom-0">
-                <div class="input-group ml-auto" style="width: 300px;">
-                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                <a href="{{ route('data_users.create') }}" class="btn btn-primary">Tambah Sertifikat</a>
+                <form action="{{ route('data_users.index') }}" method="GET" class="input-group ml-auto" style="width: 300px;">
+                    <!-- <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan Nama atau Email" value="{{ request()->get('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">Cari</button> -->
+                </form>
             </div>
 
             <div class="card-body">
@@ -39,7 +36,7 @@
                         <tbody>
                             @foreach ($datauser as $user)
                                 <tr>
-                                    <td>{{ $user->id }}</td>
+                                    <td>{{ ($datauser->currentPage() - 1) * $datauser->perPage() + $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td class="text-center">
@@ -60,6 +57,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="card-footer bg-white d-flex justify-content-between align-items-center border-top-0">
                 <div class="pagination-info">
                     Showing {{ $datauser->firstItem() }} to {{ $datauser->lastItem() }} of {{ $datauser->total() }} entries
@@ -76,7 +74,7 @@
                     @endif
 
                     @for ($i = 1; $i <= $datauser->lastPage(); $i++)
-                        <button class="btn btn-sm btn-light">
+                        <button class="btn btn-sm btn-light {{ $i == $datauser->currentPage() ? 'active' : '' }}">
                             <a href="{{ $datauser->url($i) }}">{{ $i }}</a>
                         </button>
                     @endfor
@@ -100,12 +98,13 @@
 
 @push('scripts')
 <script>
-    document.getElementById('searchInput').addEventListener('input', function() {
+    document.querySelector('input[name="search"]').addEventListener('input', function() {
         var searchText = this.value.toLowerCase();
         var rows = document.querySelectorAll('#dataTable tbody tr');
         rows.forEach(function(row) {
-            var cells = row.querySelectorAll('td');
-            var isMatch = cells[1].textContent.toLowerCase().indexOf(searchText) !== -1 || cells[2].textContent.toLowerCase().indexOf(searchText) !== -1;
+            var nameCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            var emailCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+            var isMatch = nameCell.indexOf(searchText) !== -1 || emailCell.indexOf(searchText) !== -1;
             row.style.display = isMatch ? '' : 'none';
         });
     });

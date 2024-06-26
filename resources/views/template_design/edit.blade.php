@@ -13,6 +13,12 @@
 
 <div class="card border-0 shadow-sm rounded">
     <div class="card-body">
+        <!-- <a href="{{ route('template_design.store') }}" class="btn btn-md btn-secondary mb-3">Kembali</a> -->
+        <form action="{{ route('template_design.update', $sertifikat->template_id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="card border-0 shadow-sm rounded">
+    <div class="card-body">
         <a href="{{ route('template_design.store') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
         <form action="{{ route('template_design.update', $sertifikat->template_id) }}" method="POST" enctype="multipart/form-data">
             @csrf

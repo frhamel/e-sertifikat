@@ -19,8 +19,14 @@ use Illuminate\Support\Facades\Storage;
 class SertifikatController extends Controller
 {
 
-    public function index(): View 
+    public function index(Request $request): View 
     {
+        $search = $request->get('search');
+        $sertifikat = Sertifikat::when($search, function ($query) use ($search) {
+        return $query->where('nama_lengkap', 'LIKE', "%{$search}%")
+           ->orWhere('nik', 'LIKE', "%{$search}%");
+        });
+
         $sertifikat = Sertifikat::paginate(10);
 
         // $sertifikat = Sertifikat::latest()->paginate(10);

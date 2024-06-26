@@ -14,12 +14,17 @@
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('data_users.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+            <!-- <a href="{{ route('data_users.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a> -->
             <div class="card border-0 shadow-sm rounded">
                 <div class="card-body">
                     <form action="{{ route('data_users.update', $datauser->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        <a href="{{ route('data_users.index') }}" class="btn btn-md btn-secondary mb-3">Kembali</a>
+            <div class="card border-0 shadow-sm rounded">
+                <div class="card-body">
+                    <form action="{{ route('data_users.update', $datauser->id) }}" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group"> 
                             <label class="font-weight-bold">NAMA</label>
