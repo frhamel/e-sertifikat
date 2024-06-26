@@ -19,6 +19,9 @@ class EventController extends Controller
     {
         // Mengambil semua event
         $event = Event::all();
+
+        $user = auth()->user();
+        $event = Event::where('user_id', $user->id)->get();
         
         $template_design = [
             'template_id'     => 1,
